@@ -2,6 +2,10 @@
 
 The mobile application is built with React Native and TypeScript, and communicates with the SimpAns AI backend API for authentication, document processing, and AI-powered question answering.
 
+## 📱 Download Android APK
+
+[⬇️ Download SimpAnsAI APK](https://github.com/SEAwadhesh/simpans-ai-mobile/releases/download/v1.0.0/SimpAnsAI-v1.0.0-debug.apk)
+
 # SimpAns AI
 
 SimpAns AI is an AI-powered document question-answering application that allows users to upload PDF documents and ask questions about their content. It is an intelligent document assistant that helps users upload PDFs, retrieve relevant information, and ask questions in natural language. Built around a retrieval-augmented generation (RAG) workflow, the platform transforms document content into searchable knowledge and delivers contextual answers based on the uploaded material.

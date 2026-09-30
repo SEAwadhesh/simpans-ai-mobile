@@ -19,7 +19,10 @@ import { askQuestion, clearMessages } from '../redux/slices/chatSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { colors } from '../theme';
 
-export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({ navigation, route }) => {
+export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({
+  navigation,
+  route,
+}) => {
   const { document } = route.params;
   const dispatch = useAppDispatch();
   const insets = useSafeAreaInsets();
@@ -46,7 +49,9 @@ export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({ navigation, 
     }
     for (let i = msgIndex - 1; i >= 0; i -= 1) {
       if (messages[i].sender === 'user') {
-        dispatch(askQuestion({ documentId: document.id, question: messages[i].text }));
+        dispatch(
+          askQuestion({ documentId: document.id, question: messages[i].text }),
+        );
         break;
       }
     }
@@ -55,10 +60,14 @@ export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({ navigation, 
   return (
     <KeyboardAvoidingView
       style={[styles.flex, { paddingTop: insets.top }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 8 : 0}>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 8 : 0}
+    >
       <View style={styles.header}>
-        <Pressable onPress={() => navigation.navigate('Home')} style={styles.iconBtn}>
+        <Pressable
+          onPress={() => navigation.navigate('Home')}
+          style={styles.iconBtn}
+        >
           <ArrowLeft size={20} color={colors.muted} />
         </Pressable>
         <View style={styles.docIcon}>
@@ -82,23 +91,31 @@ export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({ navigation, 
         ref={scrollRef}
         style={styles.flex}
         contentContainerStyle={styles.messages}
-        keyboardShouldPersistTaps="handled">
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="interactive"
+      >
         {messages.length === 0 ? (
           <View style={styles.empty}>
             <View style={styles.emptyIcon}>
               <Sparkles size={24} color={colors.emerald} />
             </View>
-            <Text style={styles.emptyTitle}>Ask anything about this document</Text>
+            <Text style={styles.emptyTitle}>
+              Ask anything about this document
+            </Text>
             <Text style={styles.emptyBody}>
-              SimpAns AI retrieves the most relevant chunks and generates answers grounded in your
-              document.
+              SimpAns AI retrieves the most relevant chunks and generates
+              answers grounded in your document.
             </Text>
             {[
               'What is this document about?',
               'Summarize the key points in this document.',
               'What are the main concepts or topics discussed?',
             ].map(prompt => (
-              <Pressable key={prompt} style={styles.prompt} onPress={() => send(prompt)}>
+              <Pressable
+                key={prompt}
+                style={styles.prompt}
+                onPress={() => send(prompt)}
+              >
                 <Text style={styles.promptText}>{prompt}</Text>
               </Pressable>
             ))}
@@ -116,12 +133,19 @@ export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({ navigation, 
         {isAsking ? (
           <View style={styles.thinking}>
             <ActivityIndicator size="small" color={colors.emerald} />
-            <Text style={styles.thinkingText}>Thinking... searching vector context</Text>
+            <Text style={styles.thinkingText}>
+              Thinking... searching vector context
+            </Text>
           </View>
         ) : null}
       </ScrollView>
 
-      <View style={[styles.composer, { paddingBottom: Math.max(insets.bottom, 12) }]}>
+      <View
+        style={[
+          styles.composer,
+          { paddingBottom: Math.max(insets.bottom, 12) },
+        ]}
+      >
         <TextInput
           style={styles.input}
           placeholder="Ask something about this PDF..."
@@ -131,6 +155,7 @@ export const ChatScreen: React.FC<AppStackScreenProps<'Chat'>> = ({ navigation, 
           editable={!isAsking}
           onSubmitEditing={() => send(question)}
           returnKeyType="send"
+          multiline={false}
         />
         <Button
           label="Send"
@@ -184,8 +209,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 12,
   },
-  emptyTitle: { color: colors.white, fontSize: 16, fontWeight: '700', textAlign: 'center' },
-  emptyBody: { color: colors.muted, fontSize: 12, textAlign: 'center', marginVertical: 12 },
+  emptyTitle: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  emptyBody: {
+    color: colors.muted,
+    fontSize: 12,
+    textAlign: 'center',
+    marginVertical: 12,
+  },
   prompt: {
     width: '100%',
     backgroundColor: colors.surface,
@@ -196,7 +231,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   promptText: { color: colors.text, fontSize: 12 },
-  thinking: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 4 },
+  thinking: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 4,
+  },
   thinkingText: { color: colors.emerald, fontSize: 12, fontWeight: '500' },
   composer: {
     flexDirection: 'row',

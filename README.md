@@ -25,41 +25,43 @@ Organizations, students, and professionals regularly depend on PDFs, manuals, re
 
 ## Architecture
 
-┌──────────────────────────┐
-│     React Native App     │
-│                          │
-│  Authentication          │
-│  PDF / Documents         │
-│  Chat UI                 │
-│  Navigation              │
-└────────────┬─────────────┘
-             │
-             │ REST API
-             ▼
-┌──────────────────────────┐
-│      Express Backend     │
-│                          │
-│  Authentication          │
-│  Document Processing     │
-│  RAG Pipeline            │
-│  AI Requests             │
-└────────────┬─────────────┘
-             │
-       ┌─────┴─────┐
-       ▼           ▼
-┌───────────┐ ┌──────────────┐
-│ Supabase  │ │   Pinecone   │
-│           │ │              │
-│ Auth      │ │ Vector Store │
-│ Database  │ │ Embeddings   │
-│ Storage   │ │              │
-└───────────┘ └──────┬───────┘
-                     │
-                     ▼
-              ┌─────────────┐
-              │ Google      │
-              │ Gemini      │
-              └─────────────┘
+React Web -----------\
+                      \
+React Native ----------> SimpAns AI Backend
+                              |
+                              +-- Supabase Auth, Postgres, and Storage
+                              +-- Gemini embeddings and generation
+                              +-- Pinecone vector search
+                              
+Frontend (React + React Native + TypeScript)
+    ├── Authentication screens
+    ├── PDF upload interface
+    ├── Dashboard and document list
+    └── Chat experience
+
+        ↓ HTTP API
+
+Backend (Express + TypeScript )
+    ├── Auth middleware
+    ├── Document controllers
+    ├── Chat and RAG logic
+    └── AI orchestration services
+
+        ↓
+
+AI & Data Services
+    ├── PDF extraction
+    ├── Chunking
+    ├── Gemini embeddings
+    ├── Pinecone vector search
+    └── LLM-based answer generation
+
+        ↓
+
+External Providers
+    ├── Supabase
+    ├── Pinecone
+    └── Gemini
 
 ## Tech Stack
 

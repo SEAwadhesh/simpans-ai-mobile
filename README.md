@@ -26,40 +26,40 @@ Organizations, students, and professionals regularly depend on PDFs, manuals, re
 ## Architecture
 
 ┌──────────────────────────┐
-│ React Native App │
-│ │
-│ Authentication │
-│ PDF / Documents │
-│ Chat UI │
-│ Navigation │
+│     React Native App     │
+│                          │
+│  Authentication          │
+│  PDF / Documents         │
+│  Chat UI                 │
+│  Navigation              │
 └────────────┬─────────────┘
-│
-│ REST API
-▼
+             │
+             │ REST API
+             ▼
 ┌──────────────────────────┐
-│ Express Backend │
-│ │
-│ Authentication │
-│ Document Processing │
-│ RAG Pipeline │
-│ AI Requests │
+│      Express Backend     │
+│                          │
+│  Authentication          │
+│  Document Processing     │
+│  RAG Pipeline            │
+│  AI Requests             │
 └────────────┬─────────────┘
-│
-┌─────┴─────┐
-▼ ▼
+             │
+       ┌─────┴─────┐
+       ▼           ▼
 ┌───────────┐ ┌──────────────┐
-│ Supabase │ │ Pinecone │
-│ │ │ │
-│ Auth │ │ Vector Store │
-│ Database │ │ Embeddings │
-│ Storage │ │ │
+│ Supabase  │ │   Pinecone   │
+│           │ │              │
+│ Auth      │ │ Vector Store │
+│ Database  │ │ Embeddings   │
+│ Storage   │ │              │
 └───────────┘ └──────┬───────┘
-│
-▼
-┌─────────────┐
-│ Google │
-│ Gemini │
-└─────────────┘
+                     │
+                     ▼
+              ┌─────────────┐
+              │ Google      │
+              │ Gemini      │
+              └─────────────┘
 
 ## Tech Stack
 
@@ -207,9 +207,6 @@ The mobile application communicates with the SimpAns AI backend.
 
 Production backend:
 https://simpans-ai-backend.onrender.com
-
-Git Project:
-https://github.com/SEAwadhesh/simpans-ai-backend.git
 
 The backend is responsible for:
 
